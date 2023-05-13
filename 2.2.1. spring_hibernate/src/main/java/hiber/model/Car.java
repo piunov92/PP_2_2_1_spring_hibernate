@@ -1,7 +1,6 @@
 package hiber.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "cars")
@@ -16,6 +15,11 @@ public class Car {
 
     @Column(name = "model")
     private String model;
+
+    public Car(Integer series, String model) {
+        this.series = series;
+        this.model = model;
+    }
 
     public Car() {
     }
