@@ -37,6 +37,13 @@ public class MainApp {
          System.out.println();
       }
 
+      List<Car> cars = carService.listCars();
+      for (Car car: cars) {
+         System.out.println(car);
+         System.out.println();
+      }
+
+      System.out.println(userService.userCarFind("Car2", 2));
       context.close();
    }
 }

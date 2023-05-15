@@ -11,7 +11,7 @@ public class Car {
     private Long id;
 
     @Column(name = "series")
-    private Integer series;
+    private int series;
 
     @Column(name = "model")
     private String model;
@@ -38,5 +38,12 @@ public class Car {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return  "id = " + id +
+                "\nseries = " + series +
+                "\nmodel = '" + model + '\'';
     }
 }
