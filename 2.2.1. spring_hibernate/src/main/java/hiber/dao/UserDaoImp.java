@@ -3,9 +3,11 @@ package hiber.dao;
 import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class UserDaoImp implements UserDao {
         return query.getResultList();
     }
 
-    @Override
-    public User userCarFind(String model, int series) {
+/*    @Override
+    public User getUserCar(String model, int series) {
         List<Car> cars = sessionFactory.getCurrentSession()
                 .createQuery("from Car where model = :model and series = :series")
                 .setParameter("model", model)
@@ -46,5 +48,14 @@ public class UserDaoImp implements UserDao {
                     .orElse(null);
         }
         return null;
+    }*/
+
+    @Override
+    public User getUserCar(String model, int series) {
+        return (User) sessionFactory.getCurrentSession()
+                .createQuery("from User where userCar.model= :model and userCar.series= :series")
+                .setParameter("model", model)
+                .setParameter("series", series)
+                .uniqueResultOptional().orElse(null);
     }
 }
